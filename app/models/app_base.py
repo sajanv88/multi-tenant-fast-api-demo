@@ -11,6 +11,15 @@ class AppBaseModel(Document):
     created_at: datetime = Field(default=datetime.now(timezone.utc))
     updated_at: datetime = Field(default=datetime.now(timezone.utc))
 
+    async def serialize(self):
+        doc =  self.model_dump()
+        return {
+            "id": str(doc["id"]),
+            "tenant_id": str(doc["tenant_id"] if doc["tenant_id"] else None),
+            "created_at": str(doc["created_at"]),
+            "updated_at": str(doc["updated_at"]),
+        }
+
     class Settings:
         indexes = [
             "tenant_id",

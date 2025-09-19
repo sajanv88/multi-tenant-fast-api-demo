@@ -33,5 +33,4 @@ class Database:
         await self.client.close()
 
 config = Configuration()
-print(f"Mongo URI: {config.mongo_uri}")
 mongo_client = Database(config.mongo_uri, models=[User, Todo, Tenant])
